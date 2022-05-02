@@ -33,6 +33,7 @@ const Product = ({ product }) => {
 	})
 	const { author, comment } = userComment
 
+	console.log(comments)
 	const dispatch = useDispatch()
 	const router = useRouter()
 

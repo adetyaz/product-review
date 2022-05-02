@@ -34,7 +34,7 @@ export const addComment = createAsyncThunk(
 		try {
 			console.log(commentData)
 			const [id, comments] = commentData
-			const commentsPayload = { ...comments, comments }
+			const commentsPayload = { ...product.comments, comments }
 			console.log(id)
 			const response = await axios.put(`${ROOT_URL}/${id}`, commentsPayload)
 			response.data
