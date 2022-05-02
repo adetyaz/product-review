@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL
+const ROOT_URL = 'http://localhost:3004/data'
 
 const initialState = {
 	products: [],
@@ -32,10 +32,9 @@ export const addComment = createAsyncThunk(
 	'product/addComment',
 	async (commentData, thunkAPI) => {
 		try {
-			console.log(commentData)
 			const [id, comments] = commentData
 			const commentsPayload = { ...product.comments, comments }
-			console.log(id)
+			console.log(commentData)
 			const response = await axios.put(`${ROOT_URL}/${id}`, commentsPayload)
 			response.data
 		} catch (error) {

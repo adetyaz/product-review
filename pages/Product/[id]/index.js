@@ -19,10 +19,16 @@ import ReactStars from 'react-rating-stars-component'
 import { useDispatch } from 'react-redux'
 import { addComment } from '@features/products/productSlice'
 
-const ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL
+const ROOT_URL = 'http://localhost:3004/data'
 const focusState = {
 	outline: ' none',
 	border: '1px solid brand.300',
+}
+
+const buttonHoverState = {
+	outline: ' none',
+	border: 'none',
+	bg: 'brand.600',
 }
 
 const Product = ({ product }) => {
@@ -32,8 +38,6 @@ const Product = ({ product }) => {
 		comment: '',
 	})
 	const { author, comment } = userComment
-
-	console.log(comments)
 	const dispatch = useDispatch()
 	const router = useRouter()
 
@@ -88,7 +92,7 @@ const Product = ({ product }) => {
 								size={20}
 								activeColor='#ffd700'
 								isHalf='true'
-								edit='false'
+								edit={false}
 							/>
 							<Text as='span' color='brand.100'>
 								{product.rating.count} reviews
@@ -167,6 +171,8 @@ const Product = ({ product }) => {
 						size='lg'
 						type='submit'
 						onClick={handleSubmit}
+						_focus={focusState}
+						_hover={buttonHoverState}
 					>
 						Submit
 					</Button>
