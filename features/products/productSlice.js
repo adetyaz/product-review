@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const ROOT_URL = 'http://localhost:3004/data'
+const ROOT_URL = 'https://fakestoreapi.com/products'
 
 const initialState = {
 	products: [],

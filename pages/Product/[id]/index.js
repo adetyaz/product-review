@@ -19,7 +19,7 @@ import ReactStars from 'react-rating-stars-component'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts, addComment } from '@features/products/productSlice'
 
-const ROOT_URL = 'http://localhost:3004/data'
+const ROOT_URL = 'https://fakestoreapi.com/products'
 const focusState = {
 	outline: ' none',
 	border: '1px solid brand.300',
@@ -32,7 +32,6 @@ const buttonHoverState = {
 }
 
 const Product = ({ product }) => {
-	const [checkSubmission, setCheckSubmisson] = useState(true)
 	const productId = product.id
 	const comments = product.comments
 	const [userComment, setUserComment] = useState({
@@ -46,9 +45,6 @@ const Product = ({ product }) => {
 	// useEffect(() => {
 	// 	dispatch(getProducts())
 	// }, [])
-
-	const productData = product.comments
-	console.log(productData)
 
 	const handleChange = (e) => {
 		const name = e.target.name
@@ -207,6 +203,8 @@ export const getStaticProps = async (context) => {
 
 export const getStaticPaths = async () => {
 	const products = await axios.get(`${ROOT_URL}`)
+	const res = products.data
+	console.log(res)
 
 	const paths = products.data.map((product) => ({
 		params: { id: product.id.toString() },

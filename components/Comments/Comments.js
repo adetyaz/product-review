@@ -3,7 +3,7 @@ import { Box, Divider, Text } from '@chakra-ui/react'
 const Comments = ({ comments }) => {
 	return (
 		<>
-			{comments.map((comment) => (
+			{comments?.map((comment) => (
 				<Box
 					as='div'
 					borderY

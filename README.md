@@ -34,6 +34,19 @@ npm run dev
 yarn dev
 ```
 
+Alternative, API setup
+
+```bash
+npm install -g json-server
+
+```
+
+Start up json
+
+```bash
+$ json-server --watch data.json --port 3004
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
