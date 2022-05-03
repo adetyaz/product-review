@@ -14,10 +14,10 @@ import Header from '@components/Header/Header'
 import Comments from '@components/Comments/Comments'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+
 import ReactStars from 'react-rating-stars-component'
-import { useDispatch } from 'react-redux'
-import { addComment } from '@features/products/productSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts, addComment } from '@features/products/productSlice'
 
 const ROOT_URL = 'http://localhost:3004/data'
 const focusState = {
@@ -32,6 +32,8 @@ const buttonHoverState = {
 }
 
 const Product = ({ product }) => {
+	const [checkSubmission, setCheckSubmisson] = useState(true)
+	const productId = product.id
 	const comments = product.comments
 	const [userComment, setUserComment] = useState({
 		author: '',
@@ -39,7 +41,14 @@ const Product = ({ product }) => {
 	})
 	const { author, comment } = userComment
 	const dispatch = useDispatch()
-	const router = useRouter()
+	// const { products } = useSelector((state) => state.products)
+
+	// useEffect(() => {
+	// 	dispatch(getProducts())
+	// }, [])
+
+	const productData = product.comments
+	console.log(productData)
 
 	const handleChange = (e) => {
 		const name = e.target.name
@@ -54,12 +63,11 @@ const Product = ({ product }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 
-		const productId = router.query.id
 		const commentData = {
 			author,
 			comment,
 		}
-		dispatch(addComment([productId, commentData]))
+		dispatch(addComment({ id: productId, commentData }))
 	}
 
 	return (
@@ -173,6 +181,7 @@ const Product = ({ product }) => {
 						onClick={handleSubmit}
 						_focus={focusState}
 						_hover={buttonHoverState}
+						disabled={author.length <= 0 || comment.length <= 0}
 					>
 						Submit
 					</Button>

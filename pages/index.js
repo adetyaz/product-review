@@ -28,18 +28,21 @@ export default function Home() {
 	}, [dispatch])
 
 	const handleChange = (query) => {
-		if (/^[a-zA-Z]+$/.test(query) === false) {
-			setErrorMessage('Alphabets Only Please')
-		} else {
-			setErrorMessage('')
+		if (query !== '') {
+			if (/^[a-zA-Z]+$/.test(query) === false) {
+				setErrorMessage('Alphabets Only Please')
+			} else {
+				setErrorMessage('')
+			}
+			console.log(query)
+			setShowList(true)
 		}
-
 		const productResults = products.filter(
 			(product) =>
 				query && product.title.toLowerCase().includes(query.toLowerCase())
 		)
+		console.log(productResults)
 		setSuggestProducts(productResults)
-		setShowList(true)
 	}
 
 	return (
@@ -56,7 +59,7 @@ export default function Home() {
 				{errorMessage.length !== 0 && (
 					<Text color='brand.700'>{errorMessage}</Text>
 				)}
-				<ItemCard products={suggestedProducts} />
+				<ItemCard products={products} />
 			</Flex>
 		</>
 	)

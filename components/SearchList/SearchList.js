@@ -9,6 +9,7 @@ const SearchList = ({ products }) => {
 					key={product.id}
 					href='/Product/[id]'
 					as={`/Product/${product.id}`}
+					passHref
 				>
 					<Text color='brand.100' fontSize='1xl' cursor='pointer' m='1rem'>
 						{product.title}

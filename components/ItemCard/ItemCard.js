@@ -23,6 +23,7 @@ const ItemCard = ({ products }) => {
 		<ListItem
 			wrap='wrap'
 			justifyContent='center'
+			alignItems='center'
 			flexDirection={{ base: 'column', md: 'row' }}
 		>
 			{products.map((product) => (
@@ -31,6 +32,7 @@ const ItemCard = ({ products }) => {
 						<Box
 							as='div'
 							p='3rem'
+							bg='blue.100'
 							width={{ base: '80%', md: '30%', lg: '22%' }}
 							m='4rem'
 							rounded='2xl'

@@ -28,32 +28,44 @@ export const getProducts = createAsyncThunk(
 	}
 )
 
-export const addComment = createAsyncThunk(
-	'product/addComment',
-	async (commentData, thunkAPI) => {
-		try {
-			const [id, comments] = commentData
-			const commentsPayload = { ...product.comments, comments }
-			console.log(commentData)
-			const response = await axios.put(`${ROOT_URL}/${id}`, commentsPayload)
-			response.data
-		} catch (error) {
-			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
-				error.message ||
-				error.toString()
-			return thunkAPI.rejectWithValue(message)
-		}
-	}
-)
+//not working
+
+// export const addComment = createAsyncThunk(
+// 	'product/addComment',
+// 	async (commentData, thunkAPI) => {
+// 		try {
+// 			const [id, comments] = commentData
+// 			const commentsPayload = {
+// 				...title,
+// 				comments,
+// 			}
+// 			console.log(commentsPayload)
+// 			const response = await axios.put(
+// 				`${ROOT_URL}/${id}`,
+// 				commentsPayload.title
+// 			)
+// 			response.data
+// 		} catch (error) {
+// 			const message =
+// 				(error.response &&
+// 					error.response.data &&
+// 					error.response.data.message) ||
+// 				error.message ||
+// 				error.toString()
+// 			return thunkAPI.rejectWithValue(message)
+// 		}
+// 	}
+// )
 
 const productSlice = createSlice({
 	name: 'products',
 	initialState,
 	reducers: {
 		reset: (state) => initialState,
+		addComment: (state, action) => {
+			//not working
+			// state.products[id].comments.push(action.payload)
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -70,21 +82,8 @@ const productSlice = createSlice({
 				state.isError = true
 				state.message = action.payload
 			})
-			.addCase(addComment.pending, (state) => {
-				state.isLoading = true
-			})
-			.addCase(addComment.fulfilled, (state, action) => {
-				state.isLoading = false
-				state.isSuccess = true
-				state.products = action.payload
-			})
-			.addCase(addComment.rejected, (state, action) => {
-				state.isLoading = false
-				state.isError = true
-				state.message = action.payload
-			})
 	},
 })
 
-export const { reset } = productSlice.actions
+export const { addComment, reset } = productSlice.actions
 export default productSlice.reducer
